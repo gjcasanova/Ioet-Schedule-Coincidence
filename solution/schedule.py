@@ -23,7 +23,15 @@ def read_file(path: str) -> tuple:
 
 def parse_line(line: str) -> tuple:
     """Parse a line from the input file and return the parsed data."""
-    pass
+    try:
+        name, frames = line.split('=')
+        times = []
+        for frame in frames.split(','):
+            time = to_minutes(frame)
+            times.append(time)
+        return name, times
+    except Exception:
+        raise ValueError('The value of `line` must have the format name=DDHH:mm-HH:mm,DDHH:mm-HH:mm...')
 
 
 def to_minutes(time: str) -> tuple:

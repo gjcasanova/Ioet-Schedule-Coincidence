@@ -27,9 +27,9 @@ def test_read_file_exception():
 def test_parse_line():
     """Check the data returned by the function `parse_line` was parsed properly for each line."""
     assert schedule.parse_line('RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00- 21:00') == \
-        ('RENE', ((600, 720), (2040, 2160), (4380, 4500), (8040, 8280), (9840, 9900)))
+        ('RENE', [(600, 720), (2040, 2160), (4380, 4500), (8040, 8280), (9840, 9900)])
     assert schedule.parse_line('ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00') == \
-        ('ASTRID', ((600, 720), (5040, 5160), (9840, 9900)))
+        ('ASTRID', [(600, 720), (5040, 5160), (9840, 9900)])
 
 
 def test_parse_line_exception():
