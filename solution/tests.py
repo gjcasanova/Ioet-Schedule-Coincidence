@@ -32,9 +32,9 @@ def test_read_file_exception():
 def test_parse_line():
     """Check the data returned by the function `parse_line` was parsed properly for each line."""
     assert schedule.parse_line('RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00- 21:00') == \
-        ('RENE', [(600, 720), (2040, 2160), (4380, 4500), (8040, 8280), (9840, 9900)])
+        ('RENE', [(600, 719), (2040, 2159), (4380, 4499), (8040, 8279), (9840, 9899)])
     assert schedule.parse_line('ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00') == \
-        ('ASTRID', [(600, 720), (5040, 5160), (9840, 9900)])
+        ('ASTRID', [(600, 719), (5040, 5159), (9840, 9899)])
 
 
 def test_parse_line_exception():
@@ -45,9 +45,9 @@ def test_parse_line_exception():
 
 def test_to_minutes():
     """Check the function `to_minutes` calculates properly the elapsed minutes since Monday at 00:00."""
-    assert schedule.to_minutes('MO10:00-12:00') == (600, 720)
-    assert schedule.to_minutes('SU20:15-21:00') == (9855, 9900)
-    assert schedule.to_minutes('TH12:00-14:15') == (5040, 5175)
+    assert schedule.to_minutes('MO10:00-12:00') == (600, 719)
+    assert schedule.to_minutes('SU20:15-21:00') == (9855, 9899)
+    assert schedule.to_minutes('TH12:00-14:15') == (5040, 5174)
 
 
 def test_to_minutes_exception():

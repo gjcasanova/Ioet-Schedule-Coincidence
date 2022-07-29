@@ -28,8 +28,8 @@ def read_file(path: str) -> list:
             for line in lines:
                 name, times = parse_line(line)
                 for ingoing, outgoing in times:
-                    events.append((ingoing, False, name))  # False if is coming
-                    events.append((outgoing, True, name))
+                    events.append((ingoing, False, name))  # False if is coming.
+                    events.append((outgoing, True, name))  # True if is leaving.
         events.sort()
         return events
     except Exception:
@@ -44,7 +44,7 @@ def parse_line(line: str) -> tuple:
         for frame in frames.split(','):
             time = to_minutes(frame)
             times.append(time)
-        return name, times
+        return name, times  # ('RENE', [(600, 719), (2040, 2159), (4380, 4499), (8040, 8279), (9840, 9899)])
     except Exception:
         raise ValueError('The value of `line` must have the format name=DDHH:mm-HH:mm,DDHH:mm-HH:mm...')
 
@@ -60,7 +60,7 @@ def to_minutes(time: str) -> tuple:
         day = time[:2]
         base_minutes = base_minutes_per_day[day]
         time_a, time_b = map(parse_time, time[2:].split('-'))
-        return base_minutes + time_a, base_minutes + time_b
+        return base_minutes + time_a, base_minutes + time_b - 1  # (420, 719)
 
     except Exception:
         raise ValueError('The value of `time` must have the format DDHH:mm-HH:mm.')
@@ -78,7 +78,7 @@ def solve(data: list) -> list:
                 key = (person, name) if person < name else (name, person)
                 result[key] = result.get(key, 0) + 1
             people_in.append(name)
-    return sorted(result.items(), key=lambda x: (x[1], x[0]))
+    return sorted(result.items(), key=lambda x: (x[1], x[0]))  # [(('ANDRES', 'RENE'), 2)]
 
 
 def format_solution(solution: list) -> str:
