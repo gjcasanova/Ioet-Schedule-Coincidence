@@ -78,7 +78,6 @@ def solve(data: list) -> list:
                 key = (person, name) if person < name else (name, person)
                 result[key] = result.get(key, 0) + 1
             people_in.append(name)
-    # print(result.items())
     return sorted(result.items(), key=lambda x: (x[1], x[0]))
 
 

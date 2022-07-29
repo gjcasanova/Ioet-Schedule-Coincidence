@@ -14,9 +14,9 @@ def test_read_file():
     for row in data:
         # Check the structure.
         assert type(data).__name__ == 'list'
-        minute, is_ingoing, name = row
+        minute, is_outgoing, name = row
         assert type(minute).__name__ == 'int'
-        assert type(is_ingoing).__name__ == 'bool'
+        assert type(is_outgoing).__name__ == 'bool'
         assert type(name).__name__ == 'str'
         # Check the order.
         assert minute >= before
