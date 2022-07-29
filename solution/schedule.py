@@ -16,9 +16,21 @@ base_minutes_per_day = {
 }
 
 
-def read_file(path: str) -> tuple:
+def read_file(path: str) -> list:
     """Read a .txt file and return the data ready to process."""
-    pass
+    events = []
+    try:
+        with open(path) as file:
+            lines = file.readlines()
+            for line in lines:
+                name, times = parse_line(line)
+                for ingoing, outgoing in times:
+                    events.append((ingoing, True, name))
+                    events.append((outgoing, False, name))
+        events.sort()
+        return events
+    except Exception:
+        raise ValueError('The file is not valid.')
 
 
 def parse_line(line: str) -> tuple:

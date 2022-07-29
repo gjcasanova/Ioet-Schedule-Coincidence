@@ -10,12 +10,17 @@ from . import schedule, settings
 def test_read_file():
     """Check the format of data returned is correct when a file is read."""
     data = schedule.read_file(settings.DATA_PATH)
+    before = -1
     for row in data:
-        assert type(data).__name__ == 'tuple'
-        assert len(row) == 2
-        name, times = row
+        # Check the structure.
+        assert type(data).__name__ == 'list'
+        minute, is_ingoing, name = row
+        assert type(minute).__name__ == 'int'
+        assert type(is_ingoing).__name__ == 'bool'
         assert type(name).__name__ == 'str'
-        assert type(times).__name__ == 'tuple'
+        # Check the order.
+        assert minute >= before
+        before = minute
 
 
 def test_read_file_exception():
