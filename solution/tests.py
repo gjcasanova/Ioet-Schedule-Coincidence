@@ -41,7 +41,7 @@ def test_parse_line_exception():
 def test_to_minutes():
     """Check the function `to_minutes` calculates properly the elapsed minutes since Monday at 00:00."""
     assert schedule.to_minutes('MO10:00-12:00') == (600, 720)
-    assert schedule.to_minutes('SU20:15-21:00') == (9865, 9900)
+    assert schedule.to_minutes('SU20:15-21:00') == (9855, 9900)
     assert schedule.to_minutes('TH12:00-14:15') == (5040, 5175)
 
 
