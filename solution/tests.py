@@ -58,11 +58,12 @@ def test_to_minutes_exception():
 
 def test_solve():
     """Check the result of the solution got by `solve` function is correct."""
-    data = (
-        ('RENE', ((600, 720), (2040, 2160), (4380, 4500), (8040, 8280), (9840, 9900))),
-        ('ASTRID', ((600, 720), (5040, 5160), (9840, 9900))),
-        ('ANDRES', ((600, 720), (5040, 5160), (9840, 9900)))
-    )
+    data = [(600, False, 'ANDRES'), (600, False, 'ASTRID'), (600, False, 'RENE'), (720, True, 'ANDRES'),
+            (720, True, 'ASTRID'), (720, True, 'RENE'), (2040, False, 'RENE'), (2160, True, 'RENE'),
+            (4380, False, 'RENE'), (4500, True, 'RENE'), (5040, False, 'ANDRES'), (5040, False, 'ASTRID'),
+            (5160, True, 'ANDRES'), (5160, True, 'ASTRID'), (8040, False, 'RENE'), (8280, True, 'RENE'),
+            (9840, False, 'ANDRES'), (9840, False, 'ASTRID'), (9840, False, 'RENE'), (9900, True, 'ANDRES'),
+            (9900, True, 'ASTRID'), (9900, True, 'RENE')]
 
     expected = [
         (('ANDRES', 'RENE'), 2),

@@ -4,6 +4,9 @@ Schedule module.
 This module contains the functions to solve the problem.
 """
 
+# Local application
+from solution import settings
+
 minutes_per_day = 60 * 24
 base_minutes_per_day = {
     'MO': 0 * minutes_per_day,
@@ -12,7 +15,7 @@ base_minutes_per_day = {
     'TH': 3 * minutes_per_day,
     'FR': 4 * minutes_per_day,
     'SA': 5 * minutes_per_day,
-    'SU': 6 * minutes_per_day,
+    'SU': 6 * minutes_per_day
 }
 
 
@@ -25,8 +28,8 @@ def read_file(path: str) -> list:
             for line in lines:
                 name, times = parse_line(line)
                 for ingoing, outgoing in times:
-                    events.append((ingoing, True, name))
-                    events.append((outgoing, False, name))
+                    events.append((ingoing, False, name))  # False if is coming
+                    events.append((outgoing, True, name))
         events.sort()
         return events
     except Exception:
@@ -63,16 +66,29 @@ def to_minutes(time: str) -> tuple:
         raise ValueError('The value of `time` must have the format DDHH:mm-HH:mm.')
 
 
-def solve(data: tuple) -> tuple:
+def solve(data: list) -> list:
     """Get input data and return the solution."""
-    pass
+    people_in = []
+    result = {}
+    for _, is_outgoing, name in data:
+        if is_outgoing:
+            people_in.remove(name)
+        else:
+            for person in people_in:
+                key = (person, name) if person < name else (name, person)
+                result[key] = result.get(key, 0) + 1
+            people_in.append(name)
+    # print(result.items())
+    return sorted(result.items(), key=lambda x: (x[1], x[0]))
 
 
-def format_solution(solution: tuple) -> str:
+def format_solution(solution: list) -> str:
     """Format the solution according to the presentation rules."""
-    pass
+    return '\n'.join([f'{a}-{b}: {result}' for (a, b), result in solution])
 
 
 def run():
     """Run full solution."""
-    pass
+    data = read_file(settings.DATA_PATH)
+    solution = solve(data)
+    print(format_solution(solution))
