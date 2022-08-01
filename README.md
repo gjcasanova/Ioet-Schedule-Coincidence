@@ -38,29 +38,30 @@ Input: the name of an employee and the schedule they worked, indicating the time
 ## About the solution
 
 ### Input
-The first thing the solution does is to read the data from a file, validate it and parse it and generate a timeline with office events.  An event is when an employee comes or goes. To facilitate this task, the times are transformed to the number of minutes elapsed since Monday at 00:00.
+The first thing the solution does is to read the data from a file, validate it and parse it and generate a timeline with office events.  An event is when an employee comes or leaves.
 
 For example, if Maria starts to work on Monday 7:00 and ends at 10:00, we have two events:
 
-> Maria arrives at the office in the minute 420.
+> Maria arrives at the office on Monday at 7:00.
 
-> Maria leaves the office in the minute 600, but she stays until the minute 599.
+> Maria leaves the office on Monday at 10:00.
 
 
 ### Process
 Once we have our timeline, we should ask: Who is in the office every time a new employee arrives?
 For example:
 
-> Maria arrives at the office in the minute 420.
-> Roberto arrives at the office in the minute 600.
+> Maria arrives at the office on Monday at 7:00.
+
+> Roberto arrives at the office on Monday at 10:00.
 
 When Roberto arrives, Maria is in the office, so Maria-Roberto: 1.
 
- > Abigail arrives at the office in the minute 800.
+ > Abigail arrives at the office on Monday at 12:00.
 
  When Abigail arrives, Maria and Roberto are in the office, so Abigail-Maria: 1, Abigail-Roberto: 1.
 
-> Abigail, Roberto and Maria leave the office in the minute 860.
+> Abigail, Roberto and Maria leave the office on Monday at 17:00.
 
 The office is empty, and the solution is ready.
 
@@ -87,11 +88,16 @@ The next step is installing libraries. These ones are not required to run the so
 Ok,  now you are all set. 🚀😉
 
 ### To run the solution
-To run the solution use:
+To run the solution using default data path use:
 
     python main.py
 
-The input data is in the file *data.txt*.
+Default input data is in the file *data.txt*.
+
+If you want to run the solution using your own data files use:
+
+    python main.py data_path=/your/absolute/path/file.txt
+
 
 ### To run the tests
 This project is configured to auto-discover test files, and is possible to run them directly from the command line.
